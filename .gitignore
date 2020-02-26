@@ -1,2 +1,6 @@
 
 dataset/input/.DS_Store
+.DS_Store
+.ipynb_checkpoints
+upd_md.py
+Settings.ini
