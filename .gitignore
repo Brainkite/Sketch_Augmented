@@ -4,3 +4,6 @@ dataset/input/.DS_Store
 .ipynb_checkpoints
 upd_md.py
 Settings.ini
+Cyclegan_model.ipynb
+_post_sketch_aug.ipynb
+_post_sketch_aug_files
