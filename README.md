@@ -108,7 +108,7 @@ But good image generation is quite subjective so we will proceed differently and
 
 # 3. The first results
 
-We wont decribe in details here the code to build the model and the trainning process because it would need a hole new article to explain it but you can access the jupyter notebook where it's done here: ????
+We wont decribe in details here the code to build the model and the trainning process because it would need a hole new article to explain it but you can access the jupyter notebook where it's done here: https://github.com/Brainkite/Sketch_Augmented/blob/master/FeatLoss_Unet_GAN.ipynb
 
 After 20 min of training on a NVIDIA P100 GPU, we quickly get pretty good results on the realistic image generation from the fake sketches.
 Bellow are presented the input image shown to the model, the generated image by model and the target image wich is the original image from wich the fake sketch was created. This image beeing in the validation set, it has never been seen by the model, wich is pretty impressive.
