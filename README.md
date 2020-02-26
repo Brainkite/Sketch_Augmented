@@ -1,7 +1,3 @@
-# Title
-> summary
-
-
 # Sketch_Augmented
 
 Having worked as an architect for the last 6 years, I have witnessed hand drawing and sketching disapear more and more from the architect's toolbox. Even though this tool is still essential for the architect to reflect and find innovative ideas and esthetic principles.
@@ -12,7 +8,7 @@ With the help of Artificial inteligence methods, the end product will generate r
 
 In this article we will explain our approach and our research process while explainning some of the artificial intelligence techniques we're using.
 
-![image.png](/images/_post_sketch_aug_files/att_00000.png)
+![image.png](/_post_sketch_aug_files/att_00000.png)
 
 ## 1. Finding the right model
 
@@ -27,26 +23,26 @@ We will begin to explore the capabilities of those 2 models and how they fit to 
 
 The U-net architecture was initialy created for biomedical image segmentation (detecting and detouring objects in an image).
 
-![image.png](/images/_post_sketch_aug_files/att_00001.png)
+![image.png](/_post_sketch_aug_files/att_00001.png)
 
 The general logic behind this architecture is to have a downsampling phase called the "encoder" and an upsampling phase called "decoder".
 During the encoding phase, the image size is progressively reduced as more and more semantic and content is extracted. At the end of the encoding phase we get a "semantic" vector that will then be progressively upsamplede. But since this vector has lost all shape information, we progressively mix the generated image with the original image's shape using what we call "skip connexions". (You can read more about this architecture in the original paper https://arxiv.org/abs/1505.04597)
 
-![image.png](/images/_post_sketch_aug_files/att_00002.png)
+![image.png](/_post_sketch_aug_files/att_00002.png)
 
 This kind of architecture was also proven efficient for image enhancement and restauration when paired with a "feature loss" function. They can enhance image resolution, clean signal noise or even fill up holes in the image.
 
-![image.png](/images/_post_sketch_aug_files/att_00003.png)
+![image.png](/_post_sketch_aug_files/att_00003.png)
 
 For a generative model to be able to learn we need a tool to evaluate the accuracy of the generated image. We usualy use a second model called a "critic" that will learn to identify the generated image or the true image. But this method has not always proven good result for realistic image generation. Instead we use a pre-trained "classification" model that is normaly able to predict what objects are in the image. But instead of using the output of this model(it's a car or a horse), we pick values inside the model's layers that will represent features found in the image (textures, shapes, etc...). So when we pass the generated image and the target image, we want those values to be as close as possible.
 
-![image.png](/images/_post_sketch_aug_files/att_00004.png)
+![image.png](/_post_sketch_aug_files/att_00004.png)
 
 ### 1.2. What's CycleGan
 
 Cyclegan model basically can transfer image texture style to another texture style (style transfer). It is called this way because it has the ability to make the convertion in both directions. The most popular example is the photo to painting and reverse application:
 
-![image.png](/images/_post_sketch_aug_files/att_00005.png)
+![image.png](/_post_sketch_aug_files/att_00005.png)
 
 While this model is very good at treating textures, it handles poorly shapes and objects. Also CycleGan can be more convenient for the dataset creation because it doesn't need pair-wise input and outputs.
 
@@ -91,7 +87,7 @@ parallel(photo2sketch, get_imgfs(out_dir))
 
 
 
-![image.png](/images/_post_sketch_aug_files/att_00006.png)
+![image.png](/_post_sketch_aug_files/att_00006.png)
 
 This sketch effect script has a tendancy to produce image that would correspond to very detailed hand drawings but we will work from that and enhance it later if needed.
 
@@ -106,7 +102,7 @@ Good practice in deep learning teached to split these sets with 95%, 25% and 25%
 
 But good image generation is quite subjective so we will proceed differently and provide as much data as possible to the model so 90% in train set and 10% in valid set. Also Since the model will only train on fake sketch image, we will compose the test set with real hand made sketches and will evaluate ourself the performance of the results generated.
 
-![image.png](/images/_post_sketch_aug_files/att_00007.png)
+![image.png](/_post_sketch_aug_files/att_00007.png)
 
 (Yes, we wand the model to ultimately be able to produce an interesting representation from the third image)
 
@@ -117,13 +113,13 @@ We wont decribe in details here the code to build the model and the trainning pr
 After 20 min of training on a NVIDIA P100 GPU, we quickly get pretty good results on the realistic image generation from the fake sketches.
 Bellow are presented the input image shown to the model, the generated image by model and the target image wich is the original image from wich the fake sketch was created. This image beeing in the validation set, it has never been seen by the model, wich is pretty impressive.
 
-![image.png](/images/_post_sketch_aug_files/att_00008.png)
+![image.png](/_post_sketch_aug_files/att_00008.png)
 
 In these results we realise that the model learned to accurately recognize the volumes and use the appropriate lighting and shadowing. Also it has a surprising ability to generate materials textures and transparencies (or is it?).
 
 Now we need to evaluate the model's performances on the test set with real life sketches.
 
-![image.png](/images/_post_sketch_aug_files/att_00009.png)
+![image.png](/_post_sketch_aug_files/att_00009.png)
 
 The generated images are not as good but it's pretty encouraging. The model is still able to identify volumes and infer accurate lighting. Some shaded areas are in the dark while the outer faces are brighter. The model even added reflexion on some faces. On the other hand, vegetation is pretty poor because it's drawn in a very stylized way and the model can't make the connection between that and a real tree. But more importantly,  there is a total lack of materials textures. The model is capable to identify the concrete from the wood cladding, the paved ground from the asphalt and use appropriate colors, but it's unable to produce any texture on them.
 
@@ -135,6 +131,6 @@ To make our model trainning more accurate and closer to real life examples, we n
 
 To make this possible we will look into signal processing and computer graphics researchs. We will implement a texture filtering algorithm called "Scale-aware Structure-Preserving Texture Filtering" (Safiltering) described in this paper: http://cg.postech.ac.kr/papers/safiltering.pdf
 
-![image.png](/images/_post_sketch_aug_files/att_00010.png)
+![image.png](/_post_sketch_aug_files/att_00010.png)
 
 Also we will explore other generative models architectures like CycleGan but also NVDIA's MUNIT (https://arxiv.org/abs/1804.04732) and GAUGAN (https://arxiv.org/pdf/1903.07291.pdf)
