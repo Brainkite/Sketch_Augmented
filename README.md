@@ -10,6 +10,14 @@ In this article we will explain our approach and our research process while expl
 
 ![image.png](/post_sketch_aug_files/att_00000.png)
 
+# Table of contents
+1. [Finding the right model](#finding-the-right-model)
+    1. [What is a U-net models](#what-is-a-U-net models)
+    2. [What is CycleGan](#what-is-cyclegan)
+2. [Building the dataset](#building-the-dataset)
+3. [The training results](#the-training-results)
+4. [Next steps to improve the model](#next-steps-to-improve-the-model)
+
 ## 1. Finding the right model
 
 To be able to map a hand drawn sketch to a realistic image we need the help of artificial neural networks. They have proven in the recent years to be quite efficient in vision and image generation. These neural networks are huge mathematical functions with an enormous amount of adjustable parameters. They are able learn a task by seeing a collection of input and output examples. By "seeing" we mean passing each input through the model, comparing the result and the target output with the help a "loss function" and correcting the model's parameters. The loss function is here to process the difference there is between the 2 outputs. Finaly, this learning process is regulated by an optimizer algorithm that will allow the neural net to learn quicker and better.
@@ -19,7 +27,7 @@ Currently 2 major types of GANs seems to be suited for our task: U-net GANs and 
 
 We will begin to explore the capabilities of those 2 models and how they fit to our project's needs.
 
-### 1.1. What's a U-net models
+### 1.1. What is a U-net models
 
 The U-net architecture was initialy created for biomedical image segmentation (detecting and detouring objects in an image).
 
@@ -38,7 +46,7 @@ For a generative model to be able to learn we need a tool to evaluate the accura
 
 ![image.png](/post_sketch_aug_files/att_00004.png)
 
-### 1.2. What's CycleGan
+### 1.2. What is CycleGan
 
 Cyclegan model basically can transfer image texture style to another texture style (style transfer). It is called this way because it has the ability to make the convertion in both directions. The most popular example is the photo to painting and reverse application:
 
@@ -106,7 +114,7 @@ But good image generation is quite subjective so we will proceed differently and
 
 (Yes, we wand the model to ultimately be able to produce an interesting representation from the third image)
 
-# 3. The first results
+# 3. The training results
 
 We wont decribe in details here the code to build the model and the trainning process because it would need a hole new article to explain it but you can access the jupyter notebook where it's done here: https://github.com/Brainkite/Sketch_Augmented/blob/master/FeatLoss_Unet_GAN.ipynb
 
