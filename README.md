@@ -127,7 +127,7 @@ The generated images are not as good but it's pretty encouraging. The model is s
 
 # 4. Next steps to improve the model
 
-The conclusion that we could draw from these first results is that our script to generate sketch-like images is still providing too much information to the model. On the first look in a small resolution it doesn't look like it but whenn zoomed, the script is still keeping micro-contrasts in the textures that will not be provided in a real sketch but provide plenty information to the model to re-create accurate textures (on another note this may be an interesting lead to explore new image compression algorithms).
+The conclusion that we could draw from these first results is that our script to generate sketch-like images is still providing too much information to the model. At small resolution it doesn't look like it but when zoomed, the script is still keeping micro-contrasts in the textures that will not be provided in a real sketch. But these micro-contrasts still provide plenty informations to the model to re-create accurate textures (on another note this may be an interesting lead to explore new image compression algorithms).
 
 To make our model trainning more accurate and closer to real life examples, we need to combine our edge finding sketch effect with a texture filtering algorithm that will smoothen the textures while preserving shapes edges. Then running our initial script on the resulting images will produce cleaner sketch-like images.
 
