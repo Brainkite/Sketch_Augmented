@@ -10,14 +10,6 @@ In this article we will explain our approach and our research process while expl
 
 ![image.png](/post_sketch_aug_files/att_00000.png)
 
-# Table of contents
-1. [Finding the right model](#finding-the-right-model)
-    1. [What is a U-net models](#what-is-a-U-net models)
-    2. [What is CycleGan](#what-is-cyclegan)
-2. [Building the dataset](#building-the-dataset)
-3. [The training results](#the-training-results)
-4. [Next steps to improve the model](#next-steps-to-improve-the-model)
-
 ## 1. Finding the right model
 
 To be able to map a hand drawn sketch to a realistic image we need the help of artificial neural networks. They have proven in the recent years to be quite efficient in vision and image generation. These neural networks are huge mathematical functions with an enormous amount of adjustable parameters. They are able learn a task by seeing a collection of input and output examples. By "seeing" we mean passing each input through the model, comparing the result and the target output with the help a "loss function" and correcting the model's parameters. The loss function is here to process the difference there is between the 2 outputs. Finaly, this learning process is regulated by an optimizer algorithm that will allow the neural net to learn quicker and better.
