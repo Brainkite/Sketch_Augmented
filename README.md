@@ -91,16 +91,16 @@ parallel(photo2sketch, get_imgfs(out_dir))
 
 This sketch effect script has a tendancy to produce image that would correspond to very detailed hand drawings but we will work from that and enhance it later if needed.
 
-The dataset is currently composed of 623 curated architecture pictures with their "sketch" equivalent. This normaly isn't enough to train such a model but thanks to a technique called "data augmentation" we will automaticaly generate multiple variants of each image during the training by randomly cropping and flipping horizontally the image.
+The dataset is currently composed of 623 curated architecture pictures with their fake-sketch equivalent. This normaly isn't enough to train such a model but thanks to a technique called "data augmentation" we will automaticaly generate multiple variants of each image during the training by randomly cropping and flipping horizontally the images.
 
 We then need to split this dataset in 3 separated subsets:
 - The training set, used to train the model
 - The validation set, composed of examples that won't be used to train the model but to evaluate his performaces and adjust our trainning strategies.
 - The test set, to estimate the model's accuracy and our train strategies.
 
-Good practice in deep learning teached to split these sets with 95%, 25% and 25%.
+Good practice in deep learning teaches to split these sets with 95%, 25% and 25% of the dataset.
 
-But good image generation is quite subjective so we will proceed differently and provide as much data as possible to the model so 90% in train set and 10% in valid set. Also Since the model will only train on fake sketch image, we will compose the test set with real hand made sketches and will evaluate ourself the performance of the results generated.
+But good image generation is quite subjective so we will proceed differently and provide as much data as possible to the model so 90% in train set and 10% in valid set. Also Since the model will only train on fake sketch image, we will compose the test set with real hand made sketches and we will evaluate ourself the performance of the results generated.
 
 ![image.png](/post_sketch_aug_files/att_00007.png)
 
@@ -108,7 +108,7 @@ But good image generation is quite subjective so we will proceed differently and
 
 # 3. The training results
 
-We wont decribe in details here the code to build the model and the trainning process because it would need a hole new article to explain it but you can access the jupyter notebook where it's done here: https://github.com/Brainkite/Sketch_Augmented/blob/master/FeatLoss_Unet_GAN.ipynb
+We wont decribe in details here the code to build the model and the trainning process because it would need a hole new article to explain but you can access the jupyter notebook where it's done here: https://github.com/Brainkite/Sketch_Augmented/blob/master/FeatLoss_Unet_GAN.ipynb
 
 After 20 min of training on a NVIDIA P100 GPU, we quickly get pretty good results on the realistic image generation from the fake sketches.
 Bellow are presented the input image shown to the model, the generated image by model and the target image wich is the original image from wich the fake sketch was created. This image beeing in the validation set, it has never been seen by the model, wich is pretty impressive.
