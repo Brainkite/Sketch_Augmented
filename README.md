@@ -23,8 +23,6 @@ We will begin to explore the capabilities of those 2 models and how they fit to 
 
 The U-net architecture was initialy created for biomedical image segmentation (detecting and detouring objects in an image).
 
-![image.png](/post_sketch_aug_files/att_00001.png)
-
 The general logic behind this architecture is to have a downsampling phase called the "encoder" and an upsampling phase called "decoder".
 During the encoding phase, the image size is progressively reduced as more and more semantic and content is extracted. At the end of the encoding phase we get a "semantic" vector that will then be progressively upsamplede. But since this vector has lost all shape information, we progressively mix the generated image with the original image's shape using what we call "skip connexions". (You can read more about this architecture in the original paper https://arxiv.org/abs/1505.04597)
 
